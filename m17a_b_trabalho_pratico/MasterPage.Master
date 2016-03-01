@@ -1,0 +1,77 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.Master.cs" Inherits="m17a_b_trabalho_pratico.MaterVisitante" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/business-casual.css" rel="stylesheet" />
+        <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+       <!--Menu-->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="minhaBarra">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="index.aspx">HOME</a>
+                        </li>
+                        <!--Login/Logout-->
+                        <%if (Session["nome"] == null)
+                            { %>
+                        <li>
+                            <a href="login.aspx">Login</a>
+                        </li>
+                        <li>
+                            <a href="registo.aspx">Registar</a>
+                        </li>
+                        <%}else {
+                                if (Session["tipo"].Equals("1"))
+                                 {%>
+                                <li>
+                                    <a href="loja.aspx">Loja</a>
+                                </li>
+                                <li>
+                                    <a href="vendascliente.aspx">Compras</a>
+                                </li>
+                            <%}
+                                else if (Session["tipo"].Equals("2"))
+                                {%>
+                                <li>
+                                    <a href="Produtos.aspx">Produtos</a>
+                                </li>
+                                <li>
+                                    <a href="categoria.aspx">Categorias</a>
+                                </li>
+                                <li>
+                                    <a href="vendasadmin.aspx">Vendas</a>
+                                </li>
+                                <li>
+                                    <a href="utilizadores.aspx">Utilizadores</a>
+                                </li>
+                            <%}%>
+                                    <li>
+                                <a href="logout.aspx">Logout</a>
+                            </li>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    <!--Menu-->
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+    </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
