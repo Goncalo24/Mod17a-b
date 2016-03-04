@@ -11,7 +11,7 @@
         <br />
         <div class="table col-sm-4">
              <asp:GridView ID="GridView1" runat="server" CssClass="table active" AllowPaging="True" PageSize="3" OnPageIndexChanging="GridView1_PageIndexChanging">
-                 <PagerStyle HorizontalAlign="Right" />
+                 <PagerStyle HorizontalAlign="Right" /> 
              </asp:GridView>
         </div>
     </div>
