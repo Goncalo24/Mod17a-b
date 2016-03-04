@@ -78,7 +78,7 @@ namespace m17a_b_trabalho_pratico
         {
             try
             {
-                string cat = tbCategoria.Text;
+                string cat =Server.HtmlEncode(tbCategoria.Text);
                 bd.AdicionaCategoria(cat);
             }
             catch (Exception erro)

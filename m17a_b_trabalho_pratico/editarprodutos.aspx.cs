@@ -18,29 +18,38 @@ namespace m17a_b_trabalho_pratico
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            //validar dados dor webform
-            string strid = Request["id"].ToString();
-            int id = int.Parse(strid);
-            string nome = tbNome.Text;
-            string descricao = tbDesc.Text;
-            string categoria = tbCat.Text;
-            decimal preco = decimal.Parse(tbPreco.Text);
-            float quantidade = float.Parse(tbQuant.Text);
-            //atualizar bd
-            bd.atualizarProduto(id, nome, descricao, categoria, quantidade, preco);
-            //atualizar imagem
-            if (FileUpload1.HasFile == true)
+            try
             {
-                if (FileUpload1.PostedFile.ContentLength > 0)
+                //validar dados dor webform
+                string strid = Server.HtmlEncode(Request["id"].ToString());
+                int id = int.Parse(strid);
+                string nome = Server.HtmlEncode(tbNome.Text);
+                string descricao = Server.HtmlEncode(tbDesc.Text);
+                string categoria = Server.HtmlEncode(tbCat.Text);
+                decimal preco = decimal.Parse(Server.HtmlEncode(tbPreco.Text));
+                float quantidade = float.Parse(Server.HtmlEncode(tbQuant.Text));
+                //atualizar bd
+                bd.atualizarProduto(id, nome, descricao, categoria, quantidade, preco);
+                //atualizar imagem
+                if (FileUpload1.HasFile == true)
                 {
-                    string caminho = Server.MapPath(@"~\imagens");
-                    caminho += "\\" + id + ".jpg";
-                    FileUpload1.SaveAs(caminho);
+                    if (FileUpload1.PostedFile.ContentLength > 0)
+                    {
+                        string caminho = Server.MapPath(@"~\imagens");
+                        caminho += "\\" + id + ".jpg";
+                        FileUpload1.SaveAs(caminho);
+                    }
                 }
+                //voltar
+                Response.Redirect("Produtos.aspx");
             }
-            //voltar
-            Response.Redirect("Produtos.aspx");
+            catch (Exception erro)
+            {
+                Label1.Text = "Erro: " + erro.Message;
+            }
+            
         }
+
         //voltar
         protected void Button2_Click(object sender, EventArgs e)
         {

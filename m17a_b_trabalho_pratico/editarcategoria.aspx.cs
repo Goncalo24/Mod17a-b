@@ -21,9 +21,9 @@ namespace m17a_b_trabalho_pratico
             try
             {
                 //validar dados dor webform
-                string strid = Request["id"].ToString();
+                string strid = Server.HtmlEncode(Request["id"].ToString());
                 int id = int.Parse(strid);
-                string cat = txtcat.Text;
+                string cat = Server.HtmlEncode(txtcat.Text);
 
                 //atualizar bd
                 bd.atualizarCategoria(id, cat);

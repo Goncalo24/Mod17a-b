@@ -35,7 +35,7 @@ namespace m17a_b_trabalho_pratico
             DataTable dados = bd.DevolveConsulta("SELECT * FROM produto");
             if (ddlpesquisa.SelectedIndex!=-1 && ddlpesquisa.SelectedValue!="-1")
             {
-                string cat = ddlpesquisa.SelectedItem.Text;
+                string cat = Server.HtmlEncode(ddlpesquisa.SelectedItem.Text);
                 dados = bd.DevolveConsulta("SELECT * FROM produto WHERE categoria = '" + cat + "'"); ;
             }
            
@@ -191,7 +191,7 @@ namespace m17a_b_trabalho_pratico
 
         protected void ddlpesquisa_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string cat = ddlpesquisa.SelectedItem.Text;
+            string cat = Server.HtmlEncode(ddlpesquisa.SelectedItem.Text);
             DataTable dados = bd.DevolveConsulta("SELECT * FROM produto WHERE categoria = '" + cat + "'");
 
             GridView1.Columns.Clear();

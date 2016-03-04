@@ -17,33 +17,41 @@ namespace m17a_b_trabalho_pratico
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            //validar dados dor webform
-            string strid = Request["idcliente"].ToString();
-            int id = int.Parse(strid);
-            string nome = txtnome.Text;
-            string email = txtemail.Text;
-            string morada = txtmorada.Text;
-            string cp = txtcp.Text;
-            DateTime data = DateTime.Parse(txtdata.Text);
-            string pass;
-            int tipo = int.Parse(txttipo.Text);
-
-            //confirmar se as duas passwords são iguais
-            if (txtpass.Text != txtpass2.Text)
+            try
             {
-                Response.Write("<script>alert('As palavras passe não são iguais!');</script>");
-                return;
+                //validar dados dor webform
+                string strid = Server.HtmlEncode(Request["idcliente"].ToString());
+                int id = int.Parse(strid);
+                string nome = Server.HtmlEncode(txtnome.Text);
+                string email = Server.HtmlEncode(txtemail.Text);
+                string morada = Server.HtmlEncode(txtmorada.Text);
+                string cp = Server.HtmlEncode(txtcp.Text);
+                DateTime data = DateTime.Parse(txtdata.Text);
+                string pass;
+                int tipo = int.Parse(Server.HtmlEncode(txttipo.Text));
+
+                //confirmar se as duas passwords são iguais
+                if (txtpass.Text != txtpass2.Text)
+                {
+                    Response.Write("<script>alert('As palavras passe não são iguais!');</script>");
+                    return;
+                }
+                else
+                {
+                    pass = Server.HtmlEncode(txtpass.Text);
+                }
+
+                //atualizar bd
+                bd.atualizarCliente(id, nome, email, morada, cp, data, pass, tipo);
+
+                //voltar
+                Response.Redirect("utilizadores.aspx");
             }
-            else
+            catch (Exception erro)
             {
-                pass = Server.HtmlEncode(txtpass.Text);
+                Label9.Text = "Erro: " + erro.Message;
             }
-
-            //atualizar bd
-            bd.atualizarCliente(id, nome, email, morada, cp, data, pass, tipo);
-
-            //voltar
-            Response.Redirect("utilizadores.aspx");
+            
         }
         //voltar
         protected void Button2_Click(object sender, EventArgs e)

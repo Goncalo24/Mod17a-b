@@ -39,17 +39,24 @@ namespace m17a_b_trabalho_pratico
 
         protected void btncomprar_Click(object sender, EventArgs e)
         {
-            string strid = Request["id"].ToString();
-            int idProduto = int.Parse(strid);
-            string stridCliente = (string)Session["id"];
-            int idCliente = int.Parse(stridCliente);
-            float quantidade = float.Parse(txtquantidade.Text);
-            string strpreco = Request["preco"].ToString();
-            decimal preco = decimal.Parse(strpreco) * decimal.Parse(quantidade.ToString()); ;
-            DateTime data = DateTime.Now;
+            try
+            {
+                string strid = Request["id"].ToString();
+                int idProduto = int.Parse(strid);
+                string stridCliente = (string)Session["id"];
+                int idCliente = int.Parse(stridCliente);
+                float quantidade = float.Parse(txtquantidade.Text);
+                string strpreco = Server.HtmlEncode(Request["preco"].ToString());
+                decimal preco = decimal.Parse(strpreco) * decimal.Parse(quantidade.ToString()); 
+                DateTime data = DateTime.Now;
 
-            bd.adicionarVenda(idCliente, idProduto, preco, quantidade, data);
-            Response.Redirect("loja.aspx");
+                bd.adicionarVenda(idCliente, idProduto, preco, quantidade, data);
+                Response.Redirect("loja.aspx");
+            }
+            catch (Exception)
+            {
+                Label2.Text = "Slecione um valor correto";
+            }
         }
     }
 }

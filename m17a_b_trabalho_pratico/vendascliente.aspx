@@ -1,4 +1,4 @@
-﻿<%@ Page Title="GamerStore" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="vendascliente.aspx.cs" Inherits="m17a_b_trabalho_pratico.vendascliente" %>
+﻿<%@ Page Title="GamerStore" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="vendascliente.aspx.cs" Inherits="m17a_b_trabalho_pratico.vendascliente" ValidateRequest="false"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

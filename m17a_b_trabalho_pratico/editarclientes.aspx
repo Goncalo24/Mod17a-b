@@ -1,4 +1,4 @@
-﻿<%@ Page Title="GamerStore" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="editarclientes.aspx.cs" Inherits="m17a_b_trabalho_pratico.editarclientes" %>
+﻿<%@ Page Title="GamerStore" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="editarclientes.aspx.cs" Inherits="m17a_b_trabalho_pratico.editarclientes" ValidateRequest="false"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -21,6 +21,8 @@
         <br />
         <asp:Label ID="Label8" runat="server" Text="Tipo de utilizador: "></asp:Label> <asp:TextBox ID="txttipo" runat="server"></asp:TextBox>
         <br />
+        <br />
+        <asp:Label ID="Label9" runat="server" Text="">
         <br />
         <asp:Button ID="Button1" runat="server" Text="Atualizar" CssClass="btn btn-danger" OnClick="Button1_Click"/>
         <asp:Button ID="Button2" runat="server" Text="Voltar" CssClass="btn btn-link" OnClick="Button2_Click"/>

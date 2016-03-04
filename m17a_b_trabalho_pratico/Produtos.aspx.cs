@@ -122,7 +122,7 @@ namespace m17a_b_trabalho_pratico
             {
                 string nome = Server.HtmlEncode(tbNome.Text);
                 string desc = Server.HtmlEncode(tbDesc.Text);
-                string cat = ddlCat.SelectedItem.Text;
+                string cat = Server.HtmlEncode(ddlCat.SelectedItem.Text);
                 float quant = float.Parse(tbQuant.Text);
                 decimal preco = Decimal.Parse(tbPreco.Text);
                 //guarda na bd
