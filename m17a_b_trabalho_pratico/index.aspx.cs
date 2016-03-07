@@ -19,7 +19,7 @@ namespace m17a_b_trabalho_pratico
 
         private void atualizaGrelha()
         {
-            DataTable dados = bd.DevolveConsulta("SELECT TOP 5 * FROM produto");
+            DataTable dados = bd.DevolveConsulta("SELECT TOP 5 * FROM produto ORDER BY id DESC");
             //limpar grelha
             GridView1.Columns.Clear();
 
