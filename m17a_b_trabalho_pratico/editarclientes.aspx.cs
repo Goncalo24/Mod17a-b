@@ -13,7 +13,10 @@ namespace m17a_b_trabalho_pratico
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["id"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
         }
         protected void Button1_Click(object sender, EventArgs e)
         {

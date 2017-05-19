@@ -14,15 +14,22 @@ namespace m17a_b_trabalho_pratico
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            atualizaGrelha();
-
-            //Actulizar a lista de categorias
-            DataTable categorias = bd.DevolveConsulta("SELECT * FROM Categorias");
-            if (categorias == null || categorias.Rows.Count == 0) return;
-            foreach (DataRow linha in categorias.Rows)
+            if (Session["id"] == null)
             {
-                ListItem novo = new ListItem(linha[1].ToString(), linha[0].ToString());
-                ddlCat.Items.Add(novo);
+                Response.Redirect("login.aspx");
+            }
+            else
+            {
+                atualizaGrelha();
+
+                //Actulizar a lista de categorias
+                DataTable categorias = bd.DevolveConsulta("SELECT * FROM Categorias");
+                if (categorias == null || categorias.Rows.Count == 0) return;
+                foreach (DataRow linha in categorias.Rows)
+                {
+                    ListItem novo = new ListItem(linha[1].ToString(), linha[0].ToString());
+                    ddlCat.Items.Add(novo);
+                }
             }
         }
 
@@ -34,6 +41,12 @@ namespace m17a_b_trabalho_pratico
             GridView1.Columns.Clear();
 
             if (dados == null) return;
+
+            foreach (DataRow linha in dados.Rows)
+            {
+                linha[2] = Server.HtmlDecode(linha[2].ToString());
+            }
+
             //adicionar coluna remover
             DataColumn cRemover = new DataColumn();
             cRemover.ColumnName = "Remover";
@@ -121,7 +134,9 @@ namespace m17a_b_trabalho_pratico
             try
             {
                 string nome = Server.HtmlEncode(tbNome.Text);
+                if (nome.Length < 3) throw new Exception("Nome muito pequeno");
                 string desc = Server.HtmlEncode(tbDesc.Text);
+                if (desc.Length < 3) throw new Exception("Descrição muito pequena");
                 string cat = Server.HtmlEncode(ddlCat.SelectedItem.Text);
                 float quant = float.Parse(tbQuant.Text);
                 decimal preco = Decimal.Parse(tbPreco.Text);

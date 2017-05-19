@@ -14,24 +14,31 @@ namespace m17a_b_trabalho_pratico
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["id"] == null)
             {
-                try
+                Response.Redirect("login.aspx");
+            }
+            else
+            {
+                if (!IsPostBack)
                 {
-                    string strid = Request["id"].ToString();
-                    int id = int.Parse(strid);
-                    DataTable cat = bd.devolveCategoria(id);
-                    if (cat== null || cat.Rows.Count == 0)
+                    try
+                    {
+                        string strid = Request["id"].ToString();
+                        int id = int.Parse(strid);
+                        DataTable cat = bd.devolveCategoria(id);
+                        if (cat == null || cat.Rows.Count == 0)
+                        {
+                            Response.Redirect("categoria.aspx");
+                            return;
+                        }
+                        lbId.Text = "Id: " + cat.Rows[0][0].ToString();
+                        lbCat.Text = "Nome: " + cat.Rows[0][1].ToString();
+                    }
+                    catch (Exception erro)
                     {
                         Response.Redirect("categoria.aspx");
-                        return;
                     }
-                    lbId.Text = "Id: " + cat.Rows[0][0].ToString();
-                    lbCat.Text = "Nome: " + cat.Rows[0][1].ToString();
-                }
-                catch (Exception erro)
-                {
-                    Response.Redirect("categoria.aspx");
                 }
             }
         }

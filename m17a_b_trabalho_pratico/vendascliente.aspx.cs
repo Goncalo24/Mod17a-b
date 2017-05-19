@@ -15,9 +15,16 @@ namespace m17a_b_trabalho_pratico
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string stridCliente = (string)Session["id"];
-            idCliente = int.Parse(stridCliente);
-            atualizaGrelha();
+            if (Session["id"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
+            else
+            {
+                string stridCliente = (string)Session["id"];
+                idCliente = int.Parse(stridCliente);
+                atualizaGrelha();
+            }
         }
         private void atualizaGrelha()
         {

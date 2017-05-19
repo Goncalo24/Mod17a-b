@@ -14,30 +14,37 @@ namespace m17a_b_trabalho_pratico
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["id"] == null)
             {
-                try
+                Response.Redirect("login.aspx");
+            }
+            else
+            {
+                if (!IsPostBack)
                 {
-                    string strid = Request["id"].ToString();
-                    int id = int.Parse(strid);
-                    DataTable cliente = bd.devolveCliente(id);
-                    if (cliente == null || cliente.Rows.Count == 0)
+                    try
+                    {
+                        string strid = Request["id"].ToString();
+                        int id = int.Parse(strid);
+                        DataTable cliente = bd.devolveCliente(id);
+                        if (cliente == null || cliente.Rows.Count == 0)
+                        {
+                            Response.Redirect("utilizadores.aspx");
+                            return;
+                        }
+                        lbId.Text = "Id: " + cliente.Rows[0][0].ToString();
+                        lbNome.Text = "Nome: " + cliente.Rows[0][1].ToString();
+                        lbEmail.Text = "Email: " + cliente.Rows[0][2].ToString();
+                        lbMorada.Text = "Morada: " + cliente.Rows[0][3].ToString();
+                        lbCP.Text = "Código Postal: " + cliente.Rows[0][4].ToString();
+                        lbData.Text = "Data Nascimento: " + cliente.Rows[0][5].ToString();
+                        lbPass.Text = "Password: " + cliente.Rows[0][6].ToString();
+                        lbTipo.Text = "Tipo de utilizador: " + cliente.Rows[0][7].ToString();
+                    }
+                    catch (Exception erro)
                     {
                         Response.Redirect("utilizadores.aspx");
-                        return;
                     }
-                    lbId.Text = "Id: " + cliente.Rows[0][0].ToString();
-                    lbNome.Text = "Nome: " + cliente.Rows[0][1].ToString();
-                    lbEmail.Text = "Email: " + cliente.Rows[0][2].ToString();
-                    lbMorada.Text = "Morada: " + cliente.Rows[0][3].ToString();
-                    lbCP.Text = "Código Postal: " + cliente.Rows[0][4].ToString();
-                    lbData.Text = "Data Nascimento: " + cliente.Rows[0][5].ToString();
-                    lbPass.Text = "Password: " + cliente.Rows[0][6].ToString();
-                    lbTipo.Text = "Tipo de utilizador: " + cliente.Rows[0][7].ToString();
-                }
-                catch (Exception erro)
-                {
-                    Response.Redirect("utilizadores.aspx");
                 }
             }
         }

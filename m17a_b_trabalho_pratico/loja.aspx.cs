@@ -14,18 +14,25 @@ namespace m17a_b_trabalho_pratico
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            atualizaGrelha();
-            if (!IsPostBack)
+            if (Session["id"] == null)
             {
-                ListItem primeiro = new ListItem("Selecione uma categoria", "-1");
-                ddlpesquisa.Items.Add(primeiro);
-                //Actulizar a lista de categorias
-                DataTable categorias = bd.DevolveConsulta("SELECT Categoria FROM Categorias");
-                if (categorias == null || categorias.Rows.Count == 0) return;
-                foreach (DataRow linha in categorias.Rows)
+                Response.Redirect("login.aspx");
+            }
+            else
+            {
+                atualizaGrelha();
+                if (!IsPostBack)
                 {
-                    ListItem novo = new ListItem(linha[0].ToString(), linha[0].ToString());
-                    ddlpesquisa.Items.Add(novo);
+                    ListItem primeiro = new ListItem("Selecione uma categoria", "-1");
+                    ddlpesquisa.Items.Add(primeiro);
+                    //Actulizar a lista de categorias
+                    DataTable categorias = bd.DevolveConsulta("SELECT Categoria FROM Categorias");
+                    if (categorias == null || categorias.Rows.Count == 0) return;
+                    foreach (DataRow linha in categorias.Rows)
+                    {
+                        ListItem novo = new ListItem(linha[0].ToString(), linha[0].ToString());
+                        ddlpesquisa.Items.Add(novo);
+                    }
                 }
             }
         }
@@ -43,6 +50,11 @@ namespace m17a_b_trabalho_pratico
             GridView1.Columns.Clear();
 
             if (dados == null) return;
+            foreach (DataRow linha in dados.Rows)
+            {
+                linha[2] = Server.HtmlDecode(linha[2].ToString());
+            }
+
             //adicionar coluna comprar
             DataColumn cComprar = new DataColumn();
             cComprar.ColumnName = "Comprar";
@@ -180,7 +192,7 @@ namespace m17a_b_trabalho_pratico
             GridView1.Columns.Add(lnkcomprar);
 
             //refresh da gridview
-            GridView1.DataBind();
+            GridView1.DataBind(); 
         }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)

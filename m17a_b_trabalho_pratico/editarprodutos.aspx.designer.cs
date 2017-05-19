@@ -40,13 +40,13 @@ namespace m17a_b_trabalho_pratico {
         protected global::System.Web.UI.WebControls.TextBox tbDesc;
         
         /// <summary>
-        /// tbCat control.
+        /// ddlCat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbCat;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCat;
         
         /// <summary>
         /// tbPreco control.

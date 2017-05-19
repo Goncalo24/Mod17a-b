@@ -10,7 +10,8 @@
         <br />
         Descrição:<asp:TextBox ID="tbDesc" runat="server"></asp:TextBox>
         <br />
-        Categoria:<asp:TextBox ID="tbCat" runat="server"></asp:TextBox>
+        Categoria: <asp:DropDownList ID="ddlCat" runat="server" DataValueField="Categoria">
+            </asp:DropDownList>
         <br />
         Preço:<asp:TextBox ID="tbPreco" runat="server"></asp:TextBox>
         <br />
@@ -18,7 +19,7 @@
         <br />
         <asp:Image ID="Image1" runat="server" />
         <br />
-        Imagem: <asp:FileUpload ID="FileUpload1" runat="server" CssClass="btn btn-file"/>
+        Imagem: <asp:FileUpload ID="FileUpload1" runat="server" CssClass="center-block"/>
         <br />
         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         <br />

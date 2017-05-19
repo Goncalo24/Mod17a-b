@@ -14,7 +14,14 @@ namespace m17a_b_trabalho_pratico
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            atualizaGrelha();
+            if (Session["id"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
+            else
+            {
+                atualizaGrelha();
+            }
         }
 
         private void atualizaGrelha()

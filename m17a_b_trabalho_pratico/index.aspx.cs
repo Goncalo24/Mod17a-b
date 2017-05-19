@@ -24,6 +24,12 @@ namespace m17a_b_trabalho_pratico
             GridView1.Columns.Clear();
 
             if (dados == null) return;
+
+            foreach (DataRow linha in dados.Rows)
+            {
+                linha[2] = Server.HtmlDecode(linha[2].ToString());
+            }
+
             //adicionar coluna ver
             DataColumn cVer = new DataColumn();
             cVer.ColumnName = "ver";
